@@ -28,12 +28,12 @@ class MemberMemoryRepositoryTest {
 
     @Test
     void findByName() {
-        Member member1 = new Member("member"), member2 = new Member("member");
+        Member member1 = new Member("member1"), member2 = new Member("member2");
         memberRepository.save(member1);
         memberRepository.save(member2);
 
-        List<Member> members = memberRepository.findByName("member");
-        assertThat(members.size() >= 2).isTrue();
+        Member findMember = memberRepository.findByName("member1").orElseThrow(NullPointerException::new);
+        assertThat(findMember == member1).isTrue();
     }
 
     @Test

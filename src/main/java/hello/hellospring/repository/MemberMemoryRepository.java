@@ -3,7 +3,6 @@ package hello.hellospring.repository;
 import hello.hellospring.domain.Member;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MemberMemoryRepository implements MemberRepository {
 
@@ -23,9 +22,9 @@ public class MemberMemoryRepository implements MemberRepository {
     }
 
     @Override
-    public List<Member> findByName(String name) {
+    public Optional<Member> findByName(String name) {
         return store.values().stream().filter(m -> m.getName().equals(name))
-                .collect(Collectors.toList());
+                .findFirst();
     }
 
     @Override
