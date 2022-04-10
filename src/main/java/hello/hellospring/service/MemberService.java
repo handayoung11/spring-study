@@ -3,12 +3,14 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberMemoryRepository;
 import hello.hellospring.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemberMemoryRepository();
+    private final MemberRepository memberRepository;
 
     /**
      * 회원가입
