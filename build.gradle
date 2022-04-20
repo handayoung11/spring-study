@@ -19,9 +19,15 @@ repositories {
 }
 
 dependencies {
+	//thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	//web mvc
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	//	lombok
+	//jdbc
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	//h2
+	runtimeOnly 'com.h2database:h2'
+	//lombok
 	compileOnly 'org.projectlombok:lombok:1.18.22'
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
 	compileOnly 'org.projectlombok:lombok'
