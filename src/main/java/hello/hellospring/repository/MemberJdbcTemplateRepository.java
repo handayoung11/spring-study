@@ -1,7 +1,9 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 public class MemberJdbcTemplateRepository implements MemberRepository {
 
     private final JdbcTemplate jdbcTemplate;
@@ -39,13 +42,23 @@ public class MemberJdbcTemplateRepository implements MemberRepository {
 
     @Override
     public Optional<Member> findById(Long id) {
-        Member member = jdbcTemplate.queryForObject("select * from member where id = ?", memberRowMapper(), id);
+        Member member = null;
+        try {
+            member = jdbcTemplate.queryForObject("select * from member where id = ?", memberRowMapper(), id);
+        } catch (DataAccessException e) {
+            log.error("findById 조회 실패");
+        }
         return Optional.ofNullable(member);
     }
 
     @Override
     public Optional<Member> findByName(String name) {
-        Member member = jdbcTemplate.queryForObject("select * from member where name = ?", memberRowMapper(), name);
+        Member member = null;
+        try {
+            member = jdbcTemplate.queryForObject("select * from member where name = ?", memberRowMapper(), name);
+        } catch (DataAccessException e) {
+            log.error("findByName 조회 실패");
+        }
         return Optional.ofNullable(member);
     }
 
