@@ -3,10 +3,12 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -14,6 +16,7 @@ public class MemberService {
     /**
      * 회원가입
      */
+    @Transactional
     public Long join(Member member) {
         checkDuplicated(member.getName()); // 중복회원 검증
 
